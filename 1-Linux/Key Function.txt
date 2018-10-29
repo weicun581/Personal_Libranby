@@ -1,0 +1,8 @@
+Key Function
+Ctrl-c Kill foreground process
+Ctrl-z Suspend foreground process
+Ctrl-d Terminate input, or exit shell
+Ctrl-s Suspend output
+Ctrl-q Resume output
+Ctrl-o Discard output
+Ctrl-l Clear screen
