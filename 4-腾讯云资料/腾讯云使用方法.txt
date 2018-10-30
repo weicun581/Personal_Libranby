@@ -1,0 +1,24 @@
+1、使用secureCRT进行远程连接腾讯云，
+   主机名：118.25.147.227
+   端口：22
+   用户名：ubuntu
+   密码：******
+2、连接后输入快捷方式：code
+3、启动方式：
+
+   sudo killall uwsgi
+   uwsgi --ini test_uwsgi.ini
+   /etc/init.d/nginx restart
+
+   上述三行命令就是启动了服务器，手机端直接访问：118.25.147.227：8888 就可以看到网站了。
+
+   关闭服务器命令：
+       sudo killall nginx
+
+
+
+
+【备注】
+1、nginx的log信息存放位置：:/var/log/nginx
+2、查看全部后台进程的命令：ps -ef
+3、查看Nginx后台运行情况：ps -ef | grep nginx
