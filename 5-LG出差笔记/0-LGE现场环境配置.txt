@@ -70,12 +70,11 @@ How to Test :
     c、git push origin HEAD:refs/for/master
 
 2、常用git语句：
-   a、git checkout submissions/408 -b jimmy_2491   //新建一个brnach基于676版本。
+   a、git checkout submissions/1040 -b jimmy_2507   //新建一个brnach基于676版本。
    b、git config --list //显示git配置信息。
    c、git reset hard   //删除目前所有改动。
    d、git stash  //保存到暂存区。
    e、
-
 
 
 
