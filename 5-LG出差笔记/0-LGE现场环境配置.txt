@@ -1,0 +1,86 @@
+【第一天来LG需要配置的环境】
+
+1、发邮件注册使用控件linux server，服务器地址：\\10.19.31.154\Root\home  ,尽量避开使用rtk013（出现过无法读写的情况）
+
+2、使用SecureCRT连接10.19.31.154，用户名：rtk010,密码：rtk010
+   首次连接成功后，选择y，清除掉之前的git、svn账户。
+
+3、拉code：
+   a. 先從LG gerrit網站抓下有含 script 的 project：
+      git clone https://swfarmhub.lge.com:8100/manifest scriptFolder
+   b. 切換到抓下來的目錄把 LGE_dailybuild_K5L.sh 複製到你想放的任何位置，然後執行以下指令（第二条）：
+      ./LGE_dailybuild_K5L.sh -project_root=./source -mode=GET_ALL_SOURCE_CODE -project=lg_k5l
+      ./LGE_dailybuild_K5L.sh -project_root=./K5L -mode=GET_AP_KK_SOURCE_CODE -project=lg_k5l -update_code=yes
+
+4、code拉完之后配置快捷方式：
+   a. vi ~/.bashrc
+   b. 新增以下code：
+          alias kdriver='cd ~/k5_code/source/kernel/linux/linux-4.4.3/drivers/rtk_kdriver'
+          alias system='cd ~/k5_code/source/kernel/system'
+          alias kernel='cd ~/k5_code/source/kernel/linux/linux-4.4.3/kernel'
+          alias common='cd ~/k5_code/source/kernel/linux/linux-4.4.3/drivers/rtk_kdriver/common'
+          alias run='cd ~/k5_code/source/kernel/system;sh auto_compile.sh'
+   c. 在cd ~/k5_code/source/kernel/system目录下新建编译脚本：auto_compile.sh：
+          （1）vi auto_compile.sh
+          （2）进入编辑状态，加入以下语句后保存退出。
+                   make PRJ=develop.rtd287o.tv006.emmc CLEAN_ALL=n
+   d. 执行以下语句：
+           source ~/.bashrc
+
+5、配置个人git账户信息：
+   a、在system（cd ~/k5_code/source/kernel/system）的路径下执行以下语句：
+          git config --global user.name "jimmy_wei"
+          git config --global user.email "jimmy_wei@realsil.com.cn"
+   【这个是配环境的时候第一步要做的事情，这样就不用每次都输入用户名和密码了！】
+   b、执行以下语句：
+          (1)vi ~/.netrc
+          (2)进入编辑状态修改以下内容：
+                 login  jimmy_wei
+                 password QFIHs8qbcqxc
+             保存退出。
+  
+【常用操作及常见问题解法】
+
+1、上传code的步骤：
+   a、tig status --> u
+   b、git commit (如果不是首次推送，需要修改之前推送，则使用：git commit --amend)
+      commit信息模版：
+
+/**************
+[K5LG-2022][MEMC]Film detect on, Live DTV 30/60Hz change to 24/25Hz juddger
+
+:Release Notes:
+memc performance
+
+:Detailed Notes:
+- Problem : juddger releated
+- RootCause : fw code
+- Solution : modify fw code
+- Author : jimmy_wei
+- Build : ok
+
+:Testing Preformed:
+How to Test :
+1. ATSC 3.0 board
+2. UHD channel (e.g. 7-1 KBS2 UHD)
+(MEMC debug OSD open, b809d5fc[28] on )
+
+**************/
+
+    c、git push origin HEAD:refs/for/master
+
+2、常用git语句：
+   a、git checkout submissions/408 -b jimmy_2491   //新建一个brnach基于676版本。
+   b、git config --list //显示git配置信息。
+   c、git reset hard   //删除目前所有改动。
+   d、git stash  //保存到暂存区。
+   e、
+
+
+
+
+3、U盘烧epk的方法：
+	a.epk放在根目录。
+	b.swuu ****.epk
+
+
